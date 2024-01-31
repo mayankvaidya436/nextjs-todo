@@ -2,7 +2,22 @@ import React from "react";
 import { Button, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function Addtodosform() {
+
+    export default function Addtodosform(props) {
+        const task = useRef();
+      
+        function onsubmitHandler(e) {
+          e.preventDefault();
+      
+          const enteredtask = task.current.value;
+      
+          const taskdata = {
+            task: enteredtask,
+            completed:false,
+          };
+      
+          props.ontasksubmit(taskdata);
+        }
   return (
     <div
       className="d-flex justify-content-center align-items-center"
