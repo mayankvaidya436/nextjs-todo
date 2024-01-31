@@ -15,11 +15,36 @@ export default function Completedtodos() {
           border: "2px solid grey ",
         }}
       >
-        <Card.Title>Completed Task</Card.Title>
-        <Card.Body>
-
-            <p>Revise React</p>
-
+         <Card.Title>Todo's List</Card.Title>
+        <Card.Body
+          style={{
+            fontSize: "20px",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <Row>
+            {props.completedtodos.map((todo) => (
+              <Col key={todo.id}>
+                <div className="d-flex align-items-center">
+                  <p style={{ marginRight: "10px" }}>{todo.task}</p>
+                  <Button
+                    variant="success"
+                    style={{ marginRight: "5px" }}
+                    onClick={() => completedHandler(todo.id)}
+                  >
+                    Completed
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => deleteHandler(todo.id)}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </Col>
+            ))}
+          </Row>
         </Card.Body>
       </Card>
     </div>
