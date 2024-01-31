@@ -19,6 +19,22 @@ export default function ShowtodoList(props) {
           console.error('Error updating document:', errorResult.message);
         }
       }
+      async function deleteHandler(id) {
+        const res = await fetch("/api/deletetodos", {
+          method: "DELETE",
+          body: JSON.stringify({ id: id.toString() }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (res.ok) {
+          const result = await res.json();
+          console.log(result.message);
+        } else {
+          const errorResult = await res.json();
+          console.error("Error updating document:", errorResult.message);
+        }
+      }
   return (
     <div
       className="d-flex justify-content-center align-item-center"
@@ -47,7 +63,12 @@ export default function ShowtodoList(props) {
                   >
                     Completed
                   </Button>
-                  <Button variant="danger">Delete</Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => deleteHandler(todo.id)}
+                  >
+                    Delete
+                  </Button>
                 </div>
               </Col>
             ))}
